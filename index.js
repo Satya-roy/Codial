@@ -5,7 +5,9 @@ const app = express();
 
 //use express router, need to tell express using middleware
 app.use('/',require('./routes/index'));
-
+//set view engine
+app.set('view engine','ejs');
+app.set('views','./views');
 
 
 app.listen(port,(err)=>{
