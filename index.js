@@ -4,7 +4,13 @@ const expressLayouts = require('express-ejs-layouts');
 
 const app = express();
 
+app.use(express.static('./assets'));
+
+//setting layouts config
 app.use(expressLayouts);
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
 //use express router, need to tell express using middleware
 app.use('/',require('./routes/index'));
 
