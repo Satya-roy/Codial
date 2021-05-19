@@ -3,6 +3,8 @@ const port = 8000;
 
 const app = express();
 
+//use express router, need to tell express using middleware
+app.use('/',require('./routes/index.js'));
 
 
 
