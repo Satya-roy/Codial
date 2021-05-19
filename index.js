@@ -1,8 +1,10 @@
 const express = require('express');
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
-
 const app = express();
+//connect the server to the data base
+const db = require('./config/mongoose');
+
 
 app.use(express.static('./assets'));
 
