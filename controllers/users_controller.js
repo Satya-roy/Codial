@@ -50,7 +50,7 @@ module.exports.create = function(req,res){
     });
 
 }
-//create session
-module.exports.createSession = function(){
-
+//sign in and a create session for the user
+module.exports.createSession = function(req,res){
+    return res.redirect('/');
 }
