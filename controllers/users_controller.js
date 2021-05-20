@@ -1,33 +1,10 @@
 
-// //SIIGN IN
-// module.exports.create = function(req,res){
-//     return res.render('user_Sign_Up',{
-//         title : 'Codial | Sign Up'
-//     });
-// };
-// //user sign in 
-// 
-
-// module.exports.signUp = function(req,res){
-//     userSignIn.create({
-//         email : req.body.email,
-//         password: req.body.password,
-//         name: req.body.name
-//     },function(err,newUser){
-//         if(err){
-//             console.log(`error in sign-in new user : ${err}`);
-//         }
-//         console.log(newUser);
-//         return res.end(`<h1>Sign in successful ${newUser.name}</h1>`);
-//     });
-// }
-// //---------------------------------------------------------------------------------
-
-// module.exports.create = function(req,res){
-//     return res.render('user_Sign_In',{
-//         title : 'Codial | Sign In' 
-//     });
-// }
+//user profile
+module.exports.profile = function(req,res){
+    return res.render('profile',{
+        title : 'Codial | Profile'
+    });
+}
 
 
 // render sign up page
