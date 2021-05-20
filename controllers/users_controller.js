@@ -1,34 +1,16 @@
+module.exports.profile = function(req,res){
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id,function(err,user){
+            if(user){
+                return res.end(`<h1>Cookie of ${user.name} is present</h1>`);
+            }
 
-// //SIIGN IN
-// module.exports.create = function(req,res){
-//     return res.render('user_Sign_Up',{
-//         title : 'Codial | Sign Up'
-//     });
-// };
-// //user sign in 
-// 
-
-// module.exports.signUp = function(req,res){
-//     userSignIn.create({
-//         email : req.body.email,
-//         password: req.body.password,
-//         name: req.body.name
-//     },function(err,newUser){
-//         if(err){
-//             console.log(`error in sign-in new user : ${err}`);
-//         }
-//         console.log(newUser);
-//         return res.end(`<h1>Sign in successful ${newUser.name}</h1>`);
-//     });
-// }
-// //---------------------------------------------------------------------------------
-
-// module.exports.create = function(req,res){
-//     return res.render('user_Sign_In',{
-//         title : 'Codial | Sign In' 
-//     });
-// }
-
+            return res.redirect('/users/sign-in');
+        });
+    }else{
+        return res.redirect('users/sign-in');
+    }
+}
 
 // render sign up page
 module.exports.signUp = function(req,res){
@@ -74,6 +56,23 @@ module.exports.create = function(req,res){
 
 }
 //create session
-module.exports.createSession = function(){
-
+module.exports.createSession = function(req,res){
+    //find the user
+    User.findOne({email : req.body.email},function(err,user){
+        if(err){console.log(`error in finding user in signing in`); return}
+        // handle user found
+        if(user){
+            //handle password which doesn't match
+            if(user.password != req.body.password){
+                res.redirect('back');
+            }
+            //handle session creation
+            res.cookie('user_id',user.id);
+            return res.end(`<h1>Profile of ${user.name} with email ${user.email}</h1>`);
+        }
+        else{
+            // handle user not found
+            res.redirect('back');
+        }
+    });
 }
