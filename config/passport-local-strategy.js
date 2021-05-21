@@ -42,7 +42,7 @@ passport.deserializeUser(function(id,done){
             console.log(`Error in finding the user ---> deserialize user authenctication`);
         }
 
-        return done(null,user);
+        return done(null,user);// this user is set to locals.user
     });
 });
 
@@ -57,6 +57,7 @@ passport.checkAuthentication = function(req,res,next){
     //if user is not signed in
     return res.redirect('/users/sign-in');
 }
+//5. we need to check user authentication in views
 passport.setAuthenticatedUser = function(req,res,next){
     if(req.isAuthenticated()){
         //req.user contains the current signed in user from the session-cookie 
