@@ -7,7 +7,7 @@ const User = require('../models/user');
 
 //1. authencticate using passport
 passport.use(new LocalStrategy({
-        usernameField : 'email'
+        usernameField : 'email' //unique
     },
     function(email,password,done){
         //find the user and establish the identity
@@ -47,7 +47,7 @@ passport.deserializeUser(function(id,done){
 });
 
 
-//check if the user is authenticated,create middleware for it
+//4. check if the user is authenticated,create middleware for it
 passport.checkAuthentication = function(req,res,next){
     //if the user is signed in,then pass on the request to the next function(controller's action)
     if(req.isAuthenticated()){
