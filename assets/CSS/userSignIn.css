@@ -1,14 +1,16 @@
-body{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-input{
-    font-size: 2rem;
-    margin-bottom: 5px;
-}
-button{
-    font-size: 1.5rem;
-    background-color: black;
-    color: white;
-}
+body {
+  display: flex;
+  flex-direction: column; }
+  body #sign-in-form {
+    height: 32em;
+    padding-top: 8em; }
+
+input {
+  font-size: 2rem;
+  margin-bottom: 5px; }
+
+button {
+  font-size: 1.5rem;
+  margin-top: 3em;
+  background-color: black;
+  color: white; }

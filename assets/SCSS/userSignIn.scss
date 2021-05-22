@@ -1,0 +1,18 @@
+body{
+    display: flex;
+    flex-direction: column;
+    #sign-in-form{
+        height: 32em;
+        padding-top: 8em;
+    }
+}
+input{
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+button{
+    font-size: 1.5rem;
+    margin-top: 3em;
+    background-color: black;
+    color: white;
+}
