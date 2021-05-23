@@ -4,14 +4,27 @@ const User = require('../models/user');
 module.exports.profile = function(req,res){
 
     User.findById(req.params.id,function(err,user){
-        return res.render('profile',{
+        return res.render('user_profile',{
             title : 'Codial | Profile',
             profile_user : user
         });
     });
     
 }
-
+//update profile
+module.exports.update = function(req,res){
+    console.log(req.user.id);
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id,{
+            name : req.body.name, 
+            email : req.body.email
+        },function(err,user){
+            return res.redirect('back');
+        });
+    }else{
+        return res.status(401).send('Unauthorized');
+    }
+}
 
 // render sign up page
 module.exports.signUp = function(req,res){
