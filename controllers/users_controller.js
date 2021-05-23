@@ -1,9 +1,15 @@
+const User = require('../models/user');
 
 //user profile
 module.exports.profile = function(req,res){
-    return res.render('profile',{
-        title : 'Codial | Profile'
+
+    User.findById(req.params.id,function(err,user){
+        return res.render('profile',{
+            title : 'Codial | Profile',
+            profile_user : user
+        });
     });
+    
 }
 
 
@@ -30,7 +36,7 @@ module.exports.signIn = function(req,res){
     });
 };
 
-const User = require('../models/user');
+
 
 //create new user
 module.exports.create = function(req,res){
