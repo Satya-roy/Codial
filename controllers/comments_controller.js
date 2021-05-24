@@ -16,10 +16,12 @@ module.exports.create = async function(req,res){
             post.comments.push(comment);
             post.save();
 
+            req.flash('success','Posted Comment!');
             res.redirect('/');
         }
     }
     catch(err){
+        req.flash('error',err);
         console.log('Error',err);
         return;
     }
@@ -38,9 +40,13 @@ module.exports.destroy = async function(req,res){
                 // pull helps to pull the comment from the comment array and remove it
                 // syntax used in mongodb so mongoose can use aswell
             Post.findByIdAndUpdate(postId,{ $pull :{comments: req.params.id}},function(err,post){
+
+                req.flash('success','Deleted Comment!');
+
                 return res.redirect('back');
             });
         }else{
+            req.flash('error',err);
             return res.redirect('back');
         }
     }
