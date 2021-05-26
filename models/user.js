@@ -27,12 +27,17 @@ const userSchema = new mongoose.Schema({
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb) { //req ; request, file: file from the request, cb : call back function
-      cb(null, path.join(__dirname,'..',AVATAR_PATH))
+      cb(null, path.join(__dirname,'..',AVATAR_PATH));
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now())
+      cb(null, file.fieldname + '-' + Date.now());
     }
-  })
+  });
+
+
+//static functions -- they are publicly accesseble methods
+userSchema.statics.uploadedAvatar = multer({storage: storage}).single(`avatar`);
+userSchema.statics.avatarPath = AVATAR_PATH;
 
 const User = mongoose.model('User',userSchema);
 
