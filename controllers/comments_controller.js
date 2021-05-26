@@ -16,6 +16,17 @@ module.exports.create = async function(req,res){
             post.comments.push(comment);
             post.save();
 
+            if(req.xhr){
+                comment = await comment.populate('user','name').execPopulate();
+                return res.status(200).json({
+                    
+                    data : {
+                        comment : comment
+                    },
+                    message : "comment created!"
+                });
+            }
+
             req.flash('success','Posted Comment!');
             res.redirect('/');
         }
@@ -46,11 +57,12 @@ module.exports.destroy = async function(req,res){
                 return res.redirect('back');
             });
         }else{
-            req.flash('error',err);
+            
             return res.redirect('back');
         }
     }
     catch(err){
+        req.flash('error',err);
         console.log('Error',err);
         return;
     }
