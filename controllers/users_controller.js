@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const fs = require('fs'); //file system to delete image
+const path = require('path');
 
 //user profile
 module.exports.profile = function(req,res){
@@ -13,18 +15,6 @@ module.exports.profile = function(req,res){
 }
 //update profile
 module.exports.update = async function(req,res){
-    // console.log(req.user.id);
-    // if(req.user.id == req.params.id){
-    //     User.findByIdAndUpdate(req.params.id,{
-    //         name : req.body.name, 
-    //         email : req.body.email
-    //     },function(err,user){
-    //         return res.redirect('back');
-    //     });
-    // }else{
-    //     return res.status(401).send('Unauthorized');
-    // }
-
     if(req.user.id == req.params.id){
         try{
             let user = await User.findByIdAndUpdate(req.params.id);
@@ -37,6 +27,12 @@ module.exports.update = async function(req,res){
                 user.email = req.body.email;
 
                 if(req.file){
+
+                    // if img already exist delete first then update
+                    if(user.avatar){
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar)); //to delete from the folder
+                    }
+
                     //this is saving the path of uploaded file into the avatar field in the user
                     user.avatar = User.avatarPath + '/' + req.file.filename;
                 }

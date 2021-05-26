@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
         required : true
     },
     avatar:{             // stores the path of the file
-        type: String
+        type: String     // /uploads/users/avatar/file_name
     }
 },{
     timestamps : true
